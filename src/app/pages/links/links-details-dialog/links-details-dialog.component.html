@@ -1,0 +1,77 @@
+<h1 mat-dialog-title translate>shortlinks.details.title</h1>
+<div mat-dialog-content>
+  <div class="details">
+    <div class="details-form">
+      <div *ngIf="shortLinkDetailsForm">
+        <form [formGroup]="shortLinkDetailsForm" novalidate>
+          <input type="hidden" formControlName="id" />
+          <mat-form-field class="full-with">
+            <mat-label translate>shortlinks.details.short-link</mat-label>
+            <input matInput formControlName="shortCode" />
+          </mat-form-field>
+          <mat-form-field class="full-with">
+            <mat-label translate>shortlinks.details.target-url</mat-label>
+            <input matInput formControlName="endpointUrl" readonly />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label translate>shortlinks.details.expires-on</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="expiresOn"
+            />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <div class="details-qr-code">
+      <div class="qrcodeImage" *ngIf="linkDetails">
+        <qrcode
+          (qrCodeURL)="onChangeURL($event)"
+          [qrdata]="'https://tinylnk.nl/' + linkDetails.shortCode"
+          [allowEmptyString]="true"
+          [ariaLabel]="'QR Code image with the following content...'"
+          [cssClass]="'center'"
+          [colorDark]="'#000000ff'"
+          [colorLight]="'#ffffffff'"
+          [elementType]="'canvas'"
+          [errorCorrectionLevel]="'M'"
+          [imageSrc]="'./assets/angular-logo.png'"
+          [imageHeight]="75"
+          [imageWidth]="75"
+          [margin]="4"
+          [scale]="1"
+          [title]="'https://tinylnk.nl/' + linkDetails.shortCode"
+          [width]="250"
+        ></qrcode>
+        <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+      </div>
+    </div>
+  </div>
+  <app-page-loading [show]="isLoading"></app-page-loading>
+</div>
+<div mat-dialog-actions align="end">
+  <div class="flex-spacer" *ngIf="shortLinkDetailsForm">
+    <button mat-button mat-dialog-close color="accent">
+      <span translate>button.cancel</span>
+    </button>
+    <button
+      mat-button
+      cdkFocusInitial
+      color="primary"
+      [disabled]="
+        !shortLinkDetailsForm ||
+        shortLinkDetailsForm.pristine ||
+        shortLinkDetailsForm.invalid
+      "
+      (click)="save()"
+    >
+      <span translate>button.save</span>
+    </button>
+  </div>
+</div>

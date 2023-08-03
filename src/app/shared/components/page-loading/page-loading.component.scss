@@ -1,0 +1,10 @@
+.loading-component {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+
+  .loading-panel {
+    width: 50%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,28 @@
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.main-page {
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+
+  .main-panel {
+    width: 50%;
+  }
+}
+
+.mat-mdc-card-actions {
+  display: flex;
+  .flex-spacer {
+    padding-left: 1rem;
+    text-align: left;
+    flex: 1 1 auto;
+  }
+  .flex-small {
+    text-align: right;
+    flex: 0 0 auto;
+  }
+}

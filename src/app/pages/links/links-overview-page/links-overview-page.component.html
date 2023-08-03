@@ -1,0 +1,58 @@
+<div class="links-page page">
+  <div class="links-overview">
+    <mat-table [dataSource]="dataSource">
+      <!-- User name Definition -->
+      <ng-container matColumnDef="shortCode">
+        <mat-header-cell *matHeaderCellDef translate class="column-short-code">
+          shortlinks.list.columns.shortCode
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.shortCode }} </mat-cell>
+      </ng-container>
+
+      <!-- Age Definition -->
+      <ng-container matColumnDef="endpointUrl">
+        <mat-header-cell *matHeaderCellDef translate>
+          shortlinks.list.columns.endpointUrl
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.endpointUrl }} </mat-cell>
+      </ng-container>
+
+      <!-- Title Definition -->
+      <ng-container matColumnDef="createdOn">
+        <mat-header-cell *matHeaderCellDef translate>
+          shortlinks.list.columns.createdOn
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{ row.createdOn | date }} </mat-cell>
+      </ng-container>
+
+      <!-- Actions -->
+      <!-- <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef translate>
+          shortlinks.list.columns.actions
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button
+            mat-icon-button
+            color="accent"
+            aria-label="Example icon button with a home icon"
+            (click)="deleteLink(row.id)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container> -->
+
+      <!-- Header and Row Declarations -->
+      <mat-header-row
+        *matHeaderRowDef="['shortCode', 'endpointUrl', 'createdOn']"
+      >
+      </mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['shortCode', 'endpointUrl', 'createdOn']"
+        (click)="openDetailsDialog(row)"
+      >
+      </mat-row>
+    </mat-table>
+  </div>
+</div>
+<app-page-loading [show]="isLoading"></app-page-loading>

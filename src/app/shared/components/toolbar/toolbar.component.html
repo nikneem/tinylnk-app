@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <span translate>app.title</span>
+  <span class="toolbar-spacer"></span>
+  <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with menu icon"
+      [matMenuTriggerFor]="menu"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-flat-button color="primary" (click)="logout()">Log out</button>
+  </ng-container>
+  <ng-template #loggedOut>
+    <button mat-flat-button color="primary" (click)="login()">Log in</button>
+  </ng-template>
+</mat-toolbar>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="toLinks()">
+    <mat-icon>density_small</mat-icon>
+    <span translate>menu.all-links</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    <span translate>menu.logout</span>
+  </button>
+</mat-menu>

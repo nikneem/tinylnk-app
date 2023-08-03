@@ -1,0 +1,29 @@
+.mat-mdc-table {
+  display: flex;
+  flex-flow: column;
+}
+.mat-mdc-row {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0 16px;
+  min-height: 48px;
+}
+.mat-mdc-row:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+  cursor: pointer;
+}
+.mat-column-shortCode {
+  flex: 1 1;
+}
+.mat-column-targetUrl {
+  flex: 7 7;
+}
+.mat-column-createdOn {
+  flex: 2 2;
+}
+.mat-column-actions {
+  flex: 1 1;
+  justify-content: flex-end;
+}

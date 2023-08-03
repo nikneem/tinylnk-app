@@ -1,0 +1,59 @@
+<app-toolbar></app-toolbar>
+<div class="main-page">
+  <ng-container *ngIf="auth.isAuthenticated$ | async; else information">
+    <div class="main-panel">
+      <form [formGroup]="urlForm">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title translate> pages.landing.title </mat-card-title>
+            <mat-card-subtitle translate
+              >pages.landing.subtitle</mat-card-subtitle
+            >
+          </mat-card-header>
+          <mat-card-content>
+            <p translate>pages.landing.explainer</p>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label translate>pages.landing.paste-here</mat-label>
+              <input matInput formControlName="url" />
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions align="end">
+            <div *ngIf="shortLinkDetails" class="flex-spacer">
+              <a href="https://tinylnk.nl/{{ shortLinkDetails.shortCode }}">
+                https://tinylnk.nl/{{ shortLinkDetails.shortCode }}
+              </a>
+            </div>
+            <div class="flex-small">
+              <button
+                mat-flat-button
+                color="primary"
+                [disabled]="urlForm.pristine || !urlForm.valid"
+                (click)="createShortLink()"
+              >
+                <span translate>button.create</span>
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </ng-container>
+  <ng-template #information>
+    <div class="main-panel">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2 translate>pages.landing.title</h2>
+          </mat-card-title>
+          <mat-card-subtitle translate>
+            pages.landing.subtitle
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p translate>pages.landing.login-required</p>
+        </mat-card-content>
+        <mat-card-actions align="end"> </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-template>
+</div>

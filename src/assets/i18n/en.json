@@ -1,0 +1,49 @@
+{
+  "app": {
+    "title": "tinylnk.nl"
+  },
+  "pages": {
+    "landing": {
+      "title": "tinylnk.nl",
+      "subtitle": "Shorten links, easy sharing",
+      "explainer": "Paste your link in the textbox below and confirm with [enter] to create a short link.",
+      "login-required": "You need to log in to use this service. The service is free to use and free of ads. It is an open source demo system to show off technologies and capabilities of the Azure Cloud.",
+      "paste-here": "Paste your URL here"
+    }
+  },
+  "buttons": {
+    "create": "Create"
+  },
+  "menu": {
+    "all-links": "All Links",
+    "logout": "Log out"
+  },
+  "shortlinks": {
+    "list": {
+      "columns": {
+        "shortCode": "Code",
+        "endpointUrl": "Endpoint",
+        "createdOn": "Created",
+        "actions": "Actions"
+      }
+    },
+    "details": {
+      "title": "Shortlink details",
+      "short-link": "Short code",
+      "target-url": "Target URL",
+      "expires-on": "Expiry date"
+    }
+  },
+  "dialog": {
+    "confirmation": {
+      "title": "Sample confirmation title",
+      "message": "Sample confirmation message"
+    }
+  },
+  "button": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "create": "Create"
+  }
+}
