@@ -26,6 +26,9 @@ export const shortLinksApiReducer = createReducer(
   ),
   on(ShortLinkApiActions.deleted, (state, { id }) =>
     shortLinkDeletedHandler(state, id)
+  ),
+  on(ShortLinkApiActions.added, (state, { shortLink }) =>
+    shortLinkAddHandler(state, shortLink)
   )
 );
 
@@ -72,6 +75,31 @@ function shortLinkDeletedHandler(
       shortLinkList.splice(pollIndex, 1);
     }
     copyState.shortLinks = shortLinkList;
+  }
+  return copyState;
+}
+
+function shortLinkAddHandler(
+  state: IShortLinkListState,
+  payload: IShortLinkDetailsDto
+): IShortLinkListState {
+  const copyState: IShortLinkListState = Object.assign({}, state);
+  if (copyState.shortLinks) {
+    let shortLinkList = copyState.shortLinks
+      ? new Array<IShortLinkDetailsDto>(...copyState.shortLinks)
+      : new Array<IShortLinkDetailsDto>();
+
+    const newListItem: IShortLinkDetailsDto = {
+      id: payload.id,
+      shortCode: payload.shortCode,
+      endpointUrl: payload.endpointUrl,
+      createdOn: new Date(),
+      expiresOn: payload.expiresOn,
+    };
+    shortLinkList.push(newListItem);
+    copyState.shortLinks = shortLinkList.sort((a, b) =>
+      a.shortCode > b.shortCode ? 1 : -1
+    );
   }
   return copyState;
 }
