@@ -23,6 +23,9 @@ export const shortLinksApiReducer = createReducer(
   })),
   on(ShortLinkApiActions.updated, (state, { shortLink }) =>
     shortLinkUpdatedHandler(state, shortLink)
+  ),
+  on(ShortLinkApiActions.deleted, (state, { id }) =>
+    shortLinkDeletedHandler(state, id)
   )
 );
 
@@ -48,6 +51,25 @@ function shortLinkUpdatedHandler(
       shortLinkList.splice(pollIndex, 1, newListItem);
     } else {
       shortLinkList.push(newListItem);
+    }
+    copyState.shortLinks = shortLinkList;
+  }
+  return copyState;
+}
+
+function shortLinkDeletedHandler(
+  state: IShortLinkListState,
+  id: string
+): IShortLinkListState {
+  const copyState: IShortLinkListState = Object.assign({}, state);
+  if (copyState.shortLinks) {
+    let shortLinkList = copyState.shortLinks
+      ? new Array<IShortLinkDetailsDto>(...copyState.shortLinks)
+      : new Array<IShortLinkDetailsDto>();
+
+    const pollIndex = shortLinkList.findIndex((p) => p.id == id);
+    if (pollIndex >= 0) {
+      shortLinkList.splice(pollIndex, 1);
     }
     copyState.shortLinks = shortLinkList;
   }

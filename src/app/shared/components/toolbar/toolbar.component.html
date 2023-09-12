@@ -4,8 +4,17 @@
   <ng-container *ngIf="auth.isAuthenticated$ | async; else loggedOut">
     <button
       mat-icon-button
-      class="example-icon"
-      aria-label="Example icon-button with menu icon"
+      class="create-new-icon"
+      aria-label="Create a new shortlink"
+      (click)="createNew()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <button
+      mat-icon-button
+      class="hamburger-menu-icon"
+      aria-label="Hamburger menu button"
       [matMenuTriggerFor]="menu"
     >
       <mat-icon>menu</mat-icon>

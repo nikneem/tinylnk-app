@@ -1,0 +1,12 @@
+.mat-mdc-card-actions {
+  display: flex;
+  .flex-spacer {
+    padding-left: 1rem;
+    text-align: left;
+    flex: 1 1 auto;
+  }
+  .flex-small {
+    text-align: right;
+    flex: 0 0 auto;
+  }
+}

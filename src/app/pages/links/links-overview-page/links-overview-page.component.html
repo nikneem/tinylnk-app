@@ -6,50 +6,59 @@
         <mat-header-cell *matHeaderCellDef translate class="column-short-code">
           shortlinks.list.columns.shortCode
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.shortCode }} </mat-cell>
+        <mat-cell *matCellDef="let row" class="column-short-code">
+          <a (click)="openDetailsDialog(row)">
+            {{ row.shortCode }}
+          </a>
+        </mat-cell>
       </ng-container>
 
       <!-- Age Definition -->
       <ng-container matColumnDef="endpointUrl">
-        <mat-header-cell *matHeaderCellDef translate>
+        <mat-header-cell *matHeaderCellDef translate class="column-endpoint">
           shortlinks.list.columns.endpointUrl
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.endpointUrl }} </mat-cell>
+        <mat-cell *matCellDef="let row" class="column-endpoint">
+          {{ row.endpointUrl }}
+        </mat-cell>
       </ng-container>
 
       <!-- Title Definition -->
       <ng-container matColumnDef="createdOn">
-        <mat-header-cell *matHeaderCellDef translate>
+        <mat-header-cell *matHeaderCellDef translate class="column-created-on">
           shortlinks.list.columns.createdOn
         </mat-header-cell>
-        <mat-cell *matCellDef="let row"> {{ row.createdOn | date }} </mat-cell>
+        <mat-cell *matCellDef="let row" class="column-created-on">
+          {{ row.createdOn | date }}
+        </mat-cell>
       </ng-container>
 
-      <!-- Actions -->
-      <!-- <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef translate>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef translate class="column-actions">
           shortlinks.list.columns.actions
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row" class="column-actions">
           <button
             mat-icon-button
             color="accent"
             aria-label="Example icon button with a home icon"
-            (click)="deleteLink(row.id)"
+            (click)="deleteLink(row)"
           >
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
-      </ng-container> -->
+      </ng-container>
 
       <!-- Header and Row Declarations -->
       <mat-header-row
-        *matHeaderRowDef="['shortCode', 'endpointUrl', 'createdOn']"
+        *matHeaderRowDef="['shortCode', 'endpointUrl', 'createdOn', 'actions']"
       >
       </mat-header-row>
       <mat-row
-        *matRowDef="let row; columns: ['shortCode', 'endpointUrl', 'createdOn']"
-        (click)="openDetailsDialog(row)"
+        *matRowDef="
+          let row;
+          columns: ['shortCode', 'endpointUrl', 'createdOn', 'actions']
+        "
       >
       </mat-row>
     </mat-table>

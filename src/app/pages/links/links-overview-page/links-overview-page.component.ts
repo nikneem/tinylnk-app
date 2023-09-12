@@ -20,13 +20,19 @@ export class LinksOverviewPageComponent implements OnInit {
     this.dataSource = [];
   }
 
-  public deleteLink(id: string): void {
+  public deleteLink(row: IShortLinkDetailsDto): void {
     this.dialog
-      .open(ConfirmationDialogComponent)
+      .open(ConfirmationDialogComponent, {
+        data: {
+          title: 'dialog.confirmation.delete.title',
+          message: 'dialog.confirmation.delete.message',
+          substitute: row.shortCode,
+        },
+      })
       .afterClosed()
       .subscribe((result) => {
         if (result.result === 'ok') {
-          this.store.dispatch(ShortLinkActions.delete({ id }));
+          this.store.dispatch(ShortLinkActions.delete({ id: row.id }));
         }
       });
   }

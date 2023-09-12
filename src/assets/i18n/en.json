@@ -37,7 +37,11 @@
   "dialog": {
     "confirmation": {
       "title": "Sample confirmation title",
-      "message": "Sample confirmation message"
+      "message": "Sample confirmation message",
+      "delete": {
+        "title": "Delete",
+        "message": "Do you really want to delete {{value}}?"
+      }
     }
   },
   "button": {

@@ -12,18 +12,20 @@
 }
 .mat-mdc-row:hover {
   background-color: rgba(0, 0, 0, 0.04) !important;
-  cursor: pointer;
 }
-.mat-column-shortCode {
+.column-short-code {
   flex: 1 1;
 }
-.mat-column-targetUrl {
+.column-endpoint {
   flex: 7 7;
 }
-.mat-column-createdOn {
+.column-created-on {
   flex: 2 2;
 }
-.mat-column-actions {
+.column-actions {
   flex: 1 1;
   justify-content: flex-end;
+}
+a {
+  cursor: pointer;
 }

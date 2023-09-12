@@ -23,4 +23,16 @@ export class ShortLinkListEffects {
       )
     )
   );
+
+  deleteShortLinks$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShortLinkListActions.delete),
+      exhaustMap((act) =>
+        this.shortLinksService.delete(act.id).pipe(
+          map((links) => ShortLinkApiActions.deleted({ id: act.id })),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
 }

@@ -4,5 +4,6 @@ export const ShortLinkListActions = createActionGroup({
   source: 'ShortLinkList',
   events: {
     List: props<{ query?: string }>(),
+    Delete: props<{ id: string }>(),
   },
 });

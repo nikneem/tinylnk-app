@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { ShortlinkService } from 'src/app/services/shortlink.service';
 import { IAppState } from 'src/app/state/app.state';
 import { ShortLinkActions } from 'src/app/state/shortlinkdetails/shortlinkdetails.actions';
 import { IShortLinkDetailsDto } from 'src/app/state/shortlinkdetails/shortlinkdetails.models';
+
 @Component({
-  selector: 'app-landing-page',
-  templateUrl: './landing-page.component.html',
-  styleUrls: ['./landing-page.component.scss'],
+  selector: 'app-create-shortlink',
+  templateUrl: './create-shortlink.component.html',
+  styleUrls: ['./create-shortlink.component.scss'],
 })
-export class LandingPageComponent implements OnInit {
+export class CreateShortlinkComponent implements OnInit, OnDestroy {
   public urlForm: FormGroup;
   public shortLinkDetails?: IShortLinkDetailsDto;
   private shortLinkDetailsChanged?: Subscription;
@@ -26,13 +26,6 @@ export class LandingPageComponent implements OnInit {
         ),
       ]),
     });
-  }
-
-  login() {
-    this.auth.loginWithRedirect();
-  }
-  logout() {
-    this.auth.logout({ logoutParams: { returnTo: document.location.origin } });
   }
 
   createShortLink() {
@@ -65,5 +58,10 @@ export class LandingPageComponent implements OnInit {
           }
         }
       });
+  }
+  ngOnDestroy(): void {
+    if (this.shortLinkDetailsChanged) {
+      this.shortLinkDetailsChanged.unsubscribe();
+    }
   }
 }
