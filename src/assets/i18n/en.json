@@ -23,6 +23,7 @@
       "columns": {
         "shortCode": "Code",
         "endpointUrl": "Endpoint",
+        "hits": "Hits",
         "createdOn": "Created",
         "actions": "Actions"
       }

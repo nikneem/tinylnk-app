@@ -23,6 +23,16 @@
         </mat-cell>
       </ng-container>
 
+      <!-- Age Definition -->
+      <ng-container matColumnDef="hits">
+        <mat-header-cell *matHeaderCellDef translate class="column-hits">
+          shortlinks.list.columns.hits
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row" class="column-hits">
+          {{ row.hits }}
+        </mat-cell>
+      </ng-container>
+
       <!-- Title Definition -->
       <ng-container matColumnDef="createdOn">
         <mat-header-cell *matHeaderCellDef translate class="column-created-on">
@@ -51,13 +61,19 @@
 
       <!-- Header and Row Declarations -->
       <mat-header-row
-        *matHeaderRowDef="['shortCode', 'endpointUrl', 'createdOn', 'actions']"
+        *matHeaderRowDef="[
+          'shortCode',
+          'endpointUrl',
+          'hits',
+          'createdOn',
+          'actions'
+        ]"
       >
       </mat-header-row>
       <mat-row
         *matRowDef="
           let row;
-          columns: ['shortCode', 'endpointUrl', 'createdOn', 'actions']
+          columns: ['shortCode', 'endpointUrl', 'hits', 'createdOn', 'actions']
         "
       >
       </mat-row>

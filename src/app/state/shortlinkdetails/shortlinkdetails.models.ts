@@ -2,6 +2,7 @@ export interface IShortLinksListDto {
   page: number;
   pageSize: number;
   totalEntries: number;
+  hits?: number;
   totalPages: number;
   shortLinks: Array<IShortLinkDetailsDto>;
 }

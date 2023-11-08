@@ -50,6 +50,12 @@
           [width]="250"
         ></qrcode>
         <a [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+        <br />
+        <a
+          [href]="'https://tinylnk.nl/' + linkDetails.shortCode"
+          download="qrcode"
+          >https://tinylnk.nl/{{ linkDetails.shortCode }}</a
+        >
       </div>
     </div>
   </div>
