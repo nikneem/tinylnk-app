@@ -110,6 +110,11 @@ export class LinksDetailsDialogComponent implements OnInit {
         this.linkDetails = state.shortLink;
         this.isLoading = state.isLoading;
         this.constructForm();
+        if (this.linkDetails) {
+          this.store.dispatch(
+            ShortLinkActions.history({ id: this.linkDetails?.id })
+          );
+        }
         if (state.state == 'updated') {
           this.dialogRef.close();
         }

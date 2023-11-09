@@ -1,5 +1,8 @@
 import { createActionGroup, props } from '@ngrx/store';
-import { IShortLinkDetailsDto } from './shortlinkdetails.models';
+import {
+  IHitsHistoryDto,
+  IShortLinkDetailsDto,
+} from './shortlinkdetails.models';
 
 export const ShortLinkActions = createActionGroup({
   source: 'ShortLink',
@@ -8,6 +11,7 @@ export const ShortLinkActions = createActionGroup({
     Receive: props<{ id: string }>(),
     Update: props<{ id: string; dto: IShortLinkDetailsDto }>(),
     Delete: props<{ id: string }>(),
+    History: props<{ id: string; startDate?: Date }>(),
   },
 });
 export const ShortLinkApiActions = createActionGroup({
@@ -18,6 +22,7 @@ export const ShortLinkApiActions = createActionGroup({
     Received: props<{ shortLink: IShortLinkDetailsDto }>(),
     Updated: props<{ shortLink: IShortLinkDetailsDto }>(),
     Deleted: props<{ id: string }>(),
+    HistoryReceived: props<{ hits: Array<IHitsHistoryDto> }>(),
     Failed: props<{ error: string }>(),
   },
 });

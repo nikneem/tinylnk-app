@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  IHitsHistoryDto,
   IShortLinkDetailsDto,
   IShortLinksListDto,
 } from '../state/shortlinkdetails/shortlinkdetails.models';
@@ -51,5 +52,10 @@ export class ShortlinkService {
   public isUnique(id: string, shortCode: string): Observable<null> {
     let url = `${this.serviceUrl}/api/shortlinks/${id}/${shortCode}`;
     return this.http.get<null>(url);
+  }
+
+  public histroy(id: string): Observable<Array<IHitsHistoryDto>> {
+    let url = `${this.serviceUrl}/api/hits/${id}/cumulated`;
+    return this.http.get<Array<IHitsHistoryDto>>(url);
   }
 }

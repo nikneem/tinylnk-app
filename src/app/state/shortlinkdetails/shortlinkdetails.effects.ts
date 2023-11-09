@@ -62,6 +62,20 @@ export class ShortLinkDetailsEffects {
     )
   );
 
+  historyShortLink$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ShortLinkActions.history),
+      exhaustMap((act) =>
+        this.shortLinksService.histroy(act.id).pipe(
+          map((response) =>
+            ShortLinkApiActions.historyReceived({ hits: response })
+          ),
+          catchError(() => EMPTY)
+        )
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private shortLinksService: ShortlinkService

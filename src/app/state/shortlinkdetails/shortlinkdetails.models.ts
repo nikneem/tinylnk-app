@@ -14,6 +14,12 @@ export interface IShortLinkDetailsDto {
   expiresOn?: Date;
 }
 
+export interface IHitsHistoryDto {
+  dateTimeKey: string;
+  dateTime: Date;
+  totalHits: number;
+}
+
 export interface ICreateShortlinkDto {
   endpoint: string;
 }
