@@ -1,17 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   AsyncValidatorFn,
   FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { SafeUrl } from '@angular/platform-browser';
 import { Store } from '@ngrx/store';
 import {
-  Observable,
   Subscription,
   catchError,
   debounceTime,
@@ -24,6 +21,7 @@ import { ShortlinkService } from 'src/app/services/shortlink.service';
 import { IAppState } from 'src/app/state/app.state';
 import { ShortLinkActions } from 'src/app/state/shortlinkdetails/shortlinkdetails.actions';
 import { IShortLinkDetailsDto } from 'src/app/state/shortlinkdetails/shortlinkdetails.models';
+import { Chart, registerables } from 'chart.js';
 
 export interface IShortLinkDetailsDialogData {
   id: string;
@@ -42,6 +40,10 @@ export class LinksDetailsDialogComponent implements OnInit {
   public qrCodeDownloadLink: SafeUrl = '';
 
   shortLinkDetailsForm?: FormGroup;
+  public chart: any;
+
+  private chartData: Array<string> = [];
+  private chartLabels: Array<string> = [];
 
   constructor(
     private store: Store<IAppState>,
@@ -104,11 +106,37 @@ export class LinksDetailsDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    Chart.register(...registerables);
     this.linkDetailsChangedSubscription = this.store
       .select((str) => str.shortLinkDetails)
       .subscribe((state) => {
         this.linkDetails = state.shortLink;
         this.isLoading = state.isLoading;
+        if (this.chartData && this.chartLabels) {
+          if (this.chart) {
+            this.chart.destroy();
+          }
+          this.chartData = state.chartData;
+          this.chartLabels = state.chartLabels;
+          this.chart = new Chart('MyChart', {
+            type: 'line', //this denotes tha type of chart
+
+            data: {
+              // values on X-Axis
+              labels: this.chartLabels,
+              datasets: [
+                {
+                  label: 'Hits',
+                  data: this.chartData,
+                  backgroundColor: 'yellow',
+                },
+              ],
+            },
+            options: {
+              aspectRatio: 5,
+            },
+          });
+        }
         this.constructForm();
         if (this.linkDetails) {
           this.store.dispatch(
@@ -118,6 +146,7 @@ export class LinksDetailsDialogComponent implements OnInit {
         if (state.state == 'updated') {
           this.dialogRef.close();
         }
+        this.chart.update();
       });
   }
 

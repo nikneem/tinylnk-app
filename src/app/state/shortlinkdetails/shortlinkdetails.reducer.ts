@@ -40,5 +40,10 @@ export const shortLinksReducer = createReducer(
     isLoading: false,
     shortLink: shortLink,
     state: 'updated',
+  })),
+  on(ShortLinkApiActions.historyReceived, (state, { hits }) => ({
+    ...state,
+    chartData: hits.map((h) => h.totalHits.toString()),
+    chartLabels: hits.map((h) => h.dateTime.toString()),
   }))
 );
