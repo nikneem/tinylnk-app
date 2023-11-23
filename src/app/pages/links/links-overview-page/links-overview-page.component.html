@@ -60,23 +60,9 @@
       </ng-container>
 
       <!-- Header and Row Declarations -->
-      <mat-header-row
-        *matHeaderRowDef="[
-          'shortCode',
-          'endpointUrl',
-          'hits',
-          'createdOn',
-          'actions'
-        ]"
-      >
+      <mat-header-row *matHeaderRowDef="getDisplayedColumns()">
       </mat-header-row>
-      <mat-row
-        *matRowDef="
-          let row;
-          columns: ['shortCode', 'endpointUrl', 'hits', 'createdOn', 'actions']
-        "
-      >
-      </mat-row>
+      <mat-row *matRowDef="let row; columns: getDisplayedColumns()"> </mat-row>
     </mat-table>
   </div>
 </div>

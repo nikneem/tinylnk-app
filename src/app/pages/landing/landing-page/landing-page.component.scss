@@ -10,7 +10,7 @@
   justify-content: center;
 
   .main-panel {
-    width: 50%;
+    width: 100%;
   }
 }
 
@@ -24,5 +24,29 @@
   .flex-small {
     text-align: right;
     flex: 0 0 auto;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .main-page {
+    .main-panel {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .main-page {
+    .main-panel {
+      width: 75%;
+    }
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .main-page {
+    .main-panel {
+      width: 50%;
+    }
   }
 }

@@ -134,6 +134,14 @@ export class LinksDetailsDialogComponent implements OnInit {
             },
             options: {
               aspectRatio: 5,
+              scales: {
+                x: {
+                  type: 'time',
+                  // time: {
+                  //   unit: 'month',
+                  // },
+                },
+              },
             },
           });
         }

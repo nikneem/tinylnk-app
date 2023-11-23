@@ -8,6 +8,14 @@ import { ShortLinkActions } from 'src/app/state/shortlinkdetails/shortlinkdetail
 import { IShortLinkDetailsDto } from 'src/app/state/shortlinkdetails/shortlinkdetails.models';
 import { LinksDetailsDialogComponent } from '../links-details-dialog/links-details-dialog.component';
 
+const columnDefinitions = [
+  { def: 'shortCode', minWindowsSize: 0 },
+  { def: 'endpointUrl', minWindowsSize: 0 },
+  { def: 'hits', minWindowsSize: 1200 },
+  { def: 'createdOn', minWindowsSize: 1600 },
+  { def: 'actions', minWindowsSize: 0 },
+];
+
 @Component({
   selector: 'app-links-overview-page',
   templateUrl: './links-overview-page.component.html',
@@ -16,8 +24,19 @@ import { LinksDetailsDialogComponent } from '../links-details-dialog/links-detai
 export class LinksOverviewPageComponent implements OnInit {
   public dataSource: Array<IShortLinkDetailsDto>;
   isLoading: boolean = false;
+
   constructor(private store: Store<AppState>, private dialog: MatDialog) {
     this.dataSource = [];
+  }
+
+  availableColumns(): string[] {
+    return columnDefinitions.map((cd) => cd.def);
+  }
+
+  getDisplayedColumns(): string[] {
+    return columnDefinitions
+      .filter((cd) => cd.minWindowsSize < window.innerWidth)
+      .map((cd) => cd.def);
   }
 
   public deleteLink(row: IShortLinkDetailsDto): void {
